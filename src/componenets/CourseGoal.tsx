@@ -1,49 +1,17 @@
-// first way to define this is to destructure the props as they come in. 
-// Then also define the types of our props in line.
-// This can get messy though when we do it in line when we have many props
+import { PropsWithChildren } from "react";
 
-import { type ReactNode } from "react";
+// PropsWithChildren tells us we have children as props, and we also have title seperately so we add that in too.
+type CourseGoalProps = PropsWithChildren<{ title: string }>;
 
-/*
-//uncomment star above to see example /*
-
-export default function CourseGoal2({ title, description }: {
-    title: string;
-    description: string;
-}) {
-    return (
-        <article>
-            <div>
-                <h2>{title}</h2>
-                <p>{description}</p>
-            </div>
-            <button>Delete</button>
-        </article>
-    )
-}
-*/
-
-// Instead what wse can do to make this read better is to either define them as types or an interface
-// interface is a little more extensable(more likely to be used with multiple devleopers/work)
-// defining as type is fine for smaller, personal projects.
-type CourseGoalProps2 = {
-    title: string;
-    description: string;
-}
-
-interface CourseGoalProps {
-    title: string;
-    description: string;
-    children: ReactNode;
-}
-export default function CourseGoal({ title, description, children }: CourseGoalProps) {
-    return (
-        <article>
-            <div>
-                <h2>{title}</h2>
-                <p>{description}</p>
-            </div>
-            <button>Delete</button>
-        </article>
-    )
+// then we can extract out the props ready for use. i.e. title and children
+const CourseGoal = ({ title, children }: CourseGoalProps) => {
+	return (
+		<article>
+			<div>
+				<h2>{title}</h2>
+				{children}
+			</div>
+			<button>Delete</button>
+		</article>
+	)
 }
