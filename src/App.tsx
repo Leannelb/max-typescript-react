@@ -2,6 +2,9 @@ import CourseGoal from "./componenets/CourseGoal";
 import goalsImg from './assets/goals.jpg';
 import Header from './componenets/Header';
 import { useState } from "react";
+import CourseGoalList from "./componenets/CourseGoalList";
+
+// from here, one 'goal'
 
 type CourseGoal = {
   title: string;
@@ -29,20 +32,7 @@ export default function App() {
         <h1>your course goals</h1>
       </Header>
       <button onClick={handleAddGoal}>Add Goal</button>
-
-      {/* WE now want to extract out the ul to it's own componenet, CourseGoalList */}
-      <ul>
-        {goals.map((goal) => (
-          <li key={goal.id}>
-            <CourseGoal title={goal.title}>
-              <p>{goal.description}</p>
-            </CourseGoal>
-          </li>
-        ))}
-      </ul>
-      <CourseGoal title="hello" description="description for the project" >
-        Learn it from the ground up
-      </CourseGoal>
+      <CourseGoalList goals={goals}/>
     </main>
   );
 }
