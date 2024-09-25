@@ -4,9 +4,12 @@ import Header from './componenets/Header';
 import { useState } from "react";
 import CourseGoalList from "./componenets/CourseGoalList";
 
+// previously - we copied the below 'goals' type, from the App.tsx because we know this is the type we'll see in multiple 'goals'
 // from here, one 'goal'
+// Can still make this better though, if we need to change the props with this current set up, we'll have to change it in two places
+// to avoid that! We can export types. Now we can use it in many places.
 
-type CourseGoal = {
+export type CourseGoal = {
   title: string;
   description: string;
   id: number;
