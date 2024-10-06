@@ -3,6 +3,7 @@ import goalsImg from './assets/goals.jpg';
 import Header from './componenets/Header';
 import { useState } from "react";
 import CourseGoalList from "./componenets/CourseGoalList";
+import NewGoal from "./componenets/NewGoal";
 
 // previously - we copied the below 'goals' type, from the App.tsx because we know this is the type we'll see in multiple 'goals'
 // from here, one 'goal'
@@ -17,16 +18,20 @@ export type CourseGoal = {
 export default function App() {
   const [goals, setGoals] = useState<CourseGoal[]>([]);
 
-  function handleAddGoal() {
-    setGoals(prevGoals => {
-      const newGoal: CourseGoal = {
-        title: 'Learn React + TS',
-        description: 'this is a description',
-        id: Math.random()
-      };
+  // function handleAddGoal() {
+  //   setGoals(prevGoals => {
+  //     const newGoal: CourseGoal = {
+  //       title: 'Learn React + TS',
+  //       description: 'this is a description',
+  //       id: Math.random()
+  //     };
 
-      return [...prevGoals, newGoal]
-    });
+  //     return [...prevGoals, newGoal]
+  //   });
+  // }
+
+  function handleOnDelete(id: number) {
+    setGoals(prevGoals => prevGoals.filter((goal) => goal.id !== id));
   }
 
   return (
@@ -34,8 +39,8 @@ export default function App() {
       <Header image={{ src: goalsImg, alt: 'A list of goals' }}>
         <h1>your course goals</h1>
       </Header>
-      <button onClick={handleAddGoal}>Add Goal</button>
-      <CourseGoalList goals={goals}/>
+      <NewGoal />
+      <CourseGoalList goals={goals} onDeleteGoal={handleOnDelete} />
     </main>
   );
 }
